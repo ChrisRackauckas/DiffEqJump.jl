@@ -120,17 +120,6 @@ function DiffEqBase.__init(jump_prob::JumpProblem,
        cur_saveat = 1
    end
 
-   if _saveat !== nothing && !isempty(_saveat)
-     sizehint!(u,length(_saveat)+1)
-     sizehint!(t,length(_saveat)+1)
-   elseif save_everystep
-     sizehint!(u,10000)
-     sizehint!(t,10000)
-   else
-     sizehint!(u,2)
-     sizehint!(t,2)
-   end
-
     integrator = SSAIntegrator(prob.f,copy(prob.u0),prob.tspan[1],prob.tspan[1],prob.p,
                                sol,1,prob.tspan[1],
                                cb,_saveat,save_everystep,save_end,cur_saveat,
